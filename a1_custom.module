@@ -1,0 +1,2140 @@
+<?php
+
+
+/**
+ * Implements hook_menu().
+ */
+drupal_add_css(drupal_get_path('module', 'a1_custom') . '/a1_custom.css');
+date_default_timezone_set('america/los_angeles');
+
+/* hook for orientation */
+
+function a1_custom_menu() {
+    /* add page for rating */
+    $items['orientation'] = array(
+        'title' => '',
+        'page callback' => 'orientation_page',
+        'access callback' => TRUE,
+    );
+    /* add page for users and survey */
+    $items['users'] = array(
+        'title' => 'Users',
+        'page callback' => 'users_page',
+        // 'access callback' => TRUE,
+        'access callback' => 'featured_access',
+    );
+    /* add page for list of survey completed */
+    $items['survey'] = array(
+        'title' => 'List of Surveys Completed',
+        'page callback' => 'survey_page',
+        'access callback' => TRUE,
+    );
+    /* add page for graph */
+    $items['graph'] = array(
+        'title' => ' ',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('graph_page_form'),
+        //'page callback' => 'graph_page_form',
+        'access callback' => TRUE,
+    );
+    /* add page for survey graph */
+    $items['survey-graph'] = array(
+        'title' => ' ',
+        'page callback' => 'survey_graph_page',
+        'access callback' => TRUE,
+    );
+    /* add page for showing surveys */
+    $items['surveys'] = array(
+        'title' => ' ',
+        'page callback' => 'surveys_page',
+        //'access callback' => TRUE,
+        'access callback' => 'featured_access',
+    );
+    /* add page for showing all questions */
+    $items['all-question'] = array(
+        'title' => ' ',
+        'page callback' => 'questions_page',
+        'access callback' => TRUE,
+    );
+    /* add page for popular episodes */
+    $items['popular-episodes'] = array(
+        'title' => ' ',
+        'page callback' => 'popular_episodes_page',
+        'access callback' => TRUE,
+    );
+    /* add page for tv shows which contain active survey */
+    $items['tv-shows'] = array(
+        'title' => 'Tv Shows',
+        'page callback' => 'tv_shows_page',
+        //'access callback' => TRUE,
+        'access callback' => 'featured_access',
+    );
+    /* add page for list of all shows */
+    $items['list-of-all-show'] = array(
+        'title' => ' ',
+        'page callback' => 'list_of_all_shows',
+        'access callback' => TRUE,
+    );
+    /* add page for favorate show */
+    $items['list-of-fav-shows'] = array(
+        'title' => ' ',
+        'page callback' => 'list_of_fav_shows',
+        'access callback' => TRUE,
+    );
+    /* add page for favorate show */
+    $items['list-of-surveys'] = array(
+        'title' => ' ',
+        'page callback' => 'list_of_surveys',
+        'access callback' => TRUE,
+    );
+
+
+    /* add page for favorate show */
+    $items['ret-fav-shows'] = array(
+        'title' => ' ',
+        'page callback' => 'ret_fav_shows',
+        'access callback' => TRUE,
+    );
+    /* add page for featured show */
+    $items['featured-shows'] = array(
+        'title' => 'Featured Episodes ',
+        'page callback' => 'a1_custom_featureform',
+        //'access callback' => TRUE,
+        'access callback' => 'featured_access',
+    );
+    /* add page for featured show */
+    $items['ajaxresult'] = array(
+        'title' => 'Featured Shows ',
+        'page callback' => 'featured_shows1',
+        'access callback' => TRUE,
+        'access argument' => arg(1),
+    );
+    /* add page for delete featured show */
+    $items['deletesurvey'] = array(
+        'title' => ' ',
+        'page callback' => 'delete_confirm',
+        'access callback' => TRUE,
+    );
+    /* add page for list of featured show */
+    $items['list-of-featured'] = array(
+        'title' => ' ',
+        'page callback' => 'list_of_fetaured',
+        'access callback' => TRUE,
+    );
+
+    /* add page for user update */
+    $items['user-update'] = array(
+        'title' => ' ',
+        'page callback' => 'user_update',
+        'access callback' => TRUE,
+    );
+
+   
+
+    $items['user-image'] = array(
+        'title' => ' ',
+        'page callback' => 'user_image',
+        'access callback' => TRUE,
+    );
+    /* add page for quiz answers */
+    $items['quiz-answers'] = array(
+        'title' => ' ',
+        'page callback' => 'quiz_answers',
+        'access callback' => TRUE,
+    );
+    $items['audio'] = array(
+        'title' => ' ',
+        'page callback' => 'audio',
+        'access callback' => TRUE,
+    );
+    $items['schedule-featured'] = array(
+        'title' => 'Schedule Featured',
+        'page callback' => 'a1_sche_features_form',
+        'access callback' => 'featured_access',
+    );
+
+    $items['single-attmpt-questions'] = array(
+        'title' => '',
+        'page callback' => 'single_attmpt_questions',
+        'access callback' => TRUE,
+    );
+    $items['single-attmpt-survey'] = array(
+        'title' => '',
+        'page callback' => 'single_attmpt_survey',
+        'access callback' => TRUE,
+    );
+    $items['get-uid'] = array(
+        'title' => '',
+        'page callback' => 'get_user_id',
+        'access callback' => TRUE,
+    );
+    $items['newepisode'] = array(
+        'title' => '',
+        'page callback' => 'newepisodes',
+        'access callback' => TRUE,
+    );
+    $items['allepisode'] = array(
+        'title' => '',
+        'page callback' => 'allepisodes',
+        'access callback' => TRUE,
+    );
+    $items['episode-acc-to-show'] = array(
+        'title' => '',
+        'page callback' => 'epi_acc_to_show',
+        'access callback' => TRUE,
+    );
+    /* page for user profile */
+    $items['user-profile'] = array(
+        'title' => '',
+        'page callback' => 'userprofile',
+        'access callback' => TRUE,
+    );
+    /* page for forgot password */
+    $items['forgot-password'] = array(
+        'title' => '',
+        'page callback' => 'forgotpassword',
+        'access callback' => TRUE,
+    );
+
+/* page for nodialer episodes */
+    $items['list-of-episode-nodialer'] = array(
+        'title' => '',
+        'page callback' => 'nodialerepisode',
+        'access callback' => TRUE,
+    );
+
+
+/* page for question according to  episodes */
+    $items['questionaire-acc-to-episodes'] = array(
+        'title' => '',
+        'page callback' => 'questionaire_acc_episode',
+        'access callback' => TRUE,
+    );
+
+
+    return $items;
+}
+
+/**
+ * Page callback 
+ */
+function featured_access() {
+    global $user;
+    if ($user->uid == 1) {
+        return TRUE;
+    }
+// siteadmin
+    if (array_key_exists(4, $user->roles)) {
+        return TRUE;
+    }
+    return False;
+}
+
+/* function for inserting rating into database */
+
+function a1_custom_featureform() {
+    return drupal_get_form('featured_shows');
+}
+
+function a1_sche_features_form() {
+    return drupal_get_form('a1_custom_sche_featureform');
+}
+
+if($_POST['reorder']){
+$epid=$_POST['epid'];
+echo'<BR>';
+$dorder=$_POST['display_order'];
+
+ $upd = "update a1_feat_shows set display_order=$dorder WHERE episode_id='$epid' ";
+    $result = db_query($upd);
+   
+        drupal_goto('featured-shows');
+    
+}
+
+
+function orientation_page() {
+    global $user;
+    $uid = $_POST['userid'];
+    $orient = $_POST['orient'];
+    $activ = $_POST['activ'];
+    $eid = $_POST['epid'];
+    $rate = $_POST['rate'];
+    $clock = $_POST['clock'];
+    $platform = $_POST['platform'];
+    $pause = $_POST['pause'];
+    $totruntime = $_POST['runtime'];
+    $comments = $_POST['comment'];
+    $location = $_POST['location'];
+    $timestamp = $_POST['timestamp'];
+
+    if ($activ == "thumbsup") {
+        $thumbsup = 1;
+        $comment = 0;
+        $thumbsdown = 0;
+        $questionaire = 0;
+    } if ($activ == "thumbsdown") {
+        $thumbsdown = 1;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "comment") {
+        $thumbsdown = 0;
+        $comment = 1;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "questionaire") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 1;
+    }
+    if ($activ == "pause") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "slider") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "resume") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "start") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    if ($activ == "stop") {
+        $thumbsdown = 0;
+        $comment = 0;
+        $thumbsup = 0;
+        $questionaire = 0;
+    }
+    $ncount = 1;
+    $q = "SELECT max(uniqueid) AS uniqueid,user_id from a1_orientation where user_id ='$uid' and episode_id ='$eid'";
+    $result = db_query($q);
+    while ($row = $result->fetchAssoc()) {
+        if ($row['user_id']) {
+            $uniqueid = $row['uniqueid'];
+            $q = "SELECT max(totruntime) AS totruntime from a1_orientation where user_id ='$uid'and episode_id ='$eid' ";
+            $result = db_query($q);
+            while ($row = $result->fetchAssoc()) {
+                $totruntime = $row['totruntime'] + 1;
+            }
+
+            $q = "SELECT max(sec) AS secound from a1_orientation where user_id ='$uid'and episode_id ='$eid' ";
+            $result = db_query($q);
+            while ($row = $result->fetchAssoc()) {
+                if ($activ == "pause") {
+                    $sec = $row['secound'];
+                } else {
+                    $sec = $row['secound'] + 1;
+                }
+            }
+        } else {
+            $q = "SELECT max(uniqueid) AS uniqueid from a1_orientation ";
+            $result = db_query($q);
+            while ($row = $result->fetchAssoc()) {
+                $uniqueid = $row['uniqueid'] + 1;
+                $totruntime = 1;
+                $sec = 1;
+            }
+        }
+    }
+
+    $time1 = time();
+    $time2 = date('d-m-Y', $time1);
+    $date = $time2 . ' ' . $timestamp;
+    $timestamps = strtotime($date);
+        $time = $timestamps;
+    $result = "INSERT INTO a1_orientation (user_id,uniqueid,platform,thumbsup,thumbsdown,comment,questionaire, orientation, activity, count,episode_id,rate,clock,sec,totruntime,comments,timestamps,location) VALUES ('$uid','$uniqueid','$platform','$thumbsup','$thumbsdown','$comment','$questionaire','$orient','$activ','$ncount','$eid','$rate', '$clock','$sec','$totruntime','$comments','$time','$location')";
+    db_query($result);
+    if ($result) {
+        print "{['message':'success']}";
+    } else {
+        print "{['message':'data not recieved']}";
+    }
+
+// $query ="SELECT count(uniqueid) as count from a1_orientation where episode_id='$eid' and user_id='$uid'
+//";
+//       $execute = db_query($query);
+//   
+//if ($execute) {
+//  while ($row = $execute->fetchAssoc()) {
+//     $count  = $row['count'];
+//  }
+//}
+// 
+// if($count==1){
+// /*code for user credits*/
+// 
+// $query ="SELECT field_credits_value from field_data_field_credits
+// where entity_id='$eid'
+//";
+//       $execute = db_query($query);
+//   
+//if ($execute) {
+//  while ($row = $execute->fetchAssoc()) {
+//     $credit  = $row['field_credits_value'];
+//  }
+//}
+// /* code for getting user credit   */
+// $query ="SELECT field_user_credit_value from field_data_field_user_credit
+// where entity_id='$uid'
+//";
+//       $execute = db_query($query);
+//   
+//if ($execute) {
+//  while ($row = $execute->fetchAssoc()) {
+//     $user_credit  = $row['field_user_credit_value'];
+//  }
+//}
+//
+//$credits=$user_credit + $credit;
+///*code for update of user credits*/
+//
+//$query ="UPDATE field_data_field_user_credit SET field_user_credit_value=$credits
+// where entity_id='$uid'
+//";
+//   db_query($query);
+//   // define static var
+//define('DRUPAL_ROOT', getcwd());
+//// include bootstrap
+//include_once('./includes/bootstrap.inc');
+//// initialize stuff
+//drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+//// clear cache
+//drupal_flush_all_caches();
+// }
+}
+
+/* function for showing all users with survey taken */
+
+
+function users_page() {
+    $query = db_select('users', 'u');
+    $query->leftjoin('field_data_field_first_name', 'f', 'f.entity_id = u.uid');
+    $query->leftjoin('field_data_field_last_name', 'l', 'l.entity_id = u.uid');
+    $query->leftjoin('a1_orientation', 'a', 'a.user_id = u.uid');
+    $result1 = $query
+            ->fields('u', array('name', 'login', 'uid'))
+            ->fields('a', array('episode_id'))
+            ->fields('f', array('field_first_name_value'))
+            ->fields('l', array('field_last_name_value'))
+            ->groupBy('u.uid')
+            ->condition('u.uid', 0, '<>')
+            ->orderBy('uid', 'ASC');
+    $query->addExpression('COUNT((a.episode_id))', 'showcount');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('User Id', 'First Name', 'Last Name', 'Number of Surveys Taken');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array(l($row['uid'], 'survey/' . $row['uid']), $row['field_first_name_value'], $row['field_last_name_value'], $row['showcount']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/* function for showing survey with start date and end date */
+
+function survey_page() {
+    $url1 = arg(1);
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'nid', 'created'))
+            ->fields('a', array('episode_id'))
+            ->fields('sn', array('field_show_name_nid'))
+            ->condition('type', 'episodes', 'LIKE')
+            ->condition('a.user_id', $url1)
+            ->groupBy('n.nid')
+            ->orderBy('n.created', 'DESC');
+    $query->addExpression('MAX(a.timestamps)', 'survey_attempt_date');
+    $query->RIGHTJOIN('a1_orientation', 'a', 'a.episode_id = n.nid');
+    $query->JOIN(' field_data_field_show_name', 'sn', 'sn.entity_id = n.nid');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('Show Name', 'Episode Name', 'Date Taken');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array(_get_title($row['field_show_name_nid']), l($row['title'], 'graph/' . $url1 . '/' . $row['nid']), date('Y-m-d h:i:s', $row['survey_attempt_date']));
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/**
+ * Implements hook_block_info().
+  create block for user details according to userid
+ *  */
+function a1_custom_block_info() {
+    $blocks = array();
+    /* add block for user details */
+    $blocks['user_details_block'] = array(
+        'info' => t('USER DETAILS'),
+    );
+    /* add block for survey details */
+    $blocks['survey_details_block'] = array(
+        'info' => t('SURVEY DETAILS'),
+    );
+    /* add block for per survey details */
+    $blocks['mst_par_sur_graph_block'] = array(
+        'info' => t('Most participated survey graph'),
+    );
+    /* add block for survey taken recently */
+    $blocks['survey_taken_recent_block'] = array(
+        'info' => t('Recent Surveys'),
+    );
+
+    /* add block for survey taken recently */
+    $blocks['avg_rat_graph_block'] = array(
+        'info' => t('Average rating graph'),
+    );
+
+    $blocks['users_avg_rat_graph_block'] = array(
+        'info' => t('Users On Average rating graph'),
+    );
+
+    $blocks['featured_survey_block'] = array(
+        'info' => t('Featured Survey'),
+    );
+
+    $blocks['active_survey_block'] = array(
+        'info' => t('Active Episode'),
+    );
+
+    $blocks['ended_survey_block'] = array(
+        'info' => t('Closed Episode'),
+    );
+
+    $blocks['ques_result_block'] = array(
+        'info' => t('Ques result Data'),
+    );
+    $blocks['rec_audio_block'] = array(
+        'info' => t('Recorded Audio'),
+    );
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ * 
+ * 
+ */
+function a1_custom_block_view($delta = '') {
+    $block = array();
+
+    switch ($delta) {
+        case 'user_details_block':
+            $block['subject'] = 'User Details ';
+            $block['content'] = a1_custom_BLOCK_ABC_CONTENT();
+            break;
+        case 'survey_details_block':
+            $block['subject'] = 'Survey Details ';
+            $block['content'] = a1_custom_survey_BLOCK_ABC_CONTENT();
+            break;
+        case 'mst_par_sur_graph_block':
+            $block['subject'] = 'Most participated survey graph';
+            $block['content'] = mst_par_sur_graph_BLOCK_ABC_CONTENT();
+            break;
+
+        case 'survey_taken_recent_block':
+            $block['subject'] = 'Recent Surveys ';
+            $block['content'] = a1_custom_survey_tak_rec_BLOCK_ABC_CONTENT();
+            break;
+        case 'avg_rat_graph_block':
+            $block['subject'] = 'Average Rating Graph ';
+            $block['content'] = a1_custom_av_rat_graph_BLOCK_ABC_CONTENT();
+            break;
+
+        case 'users_avg_rat_graph_block':
+            $block['subject'] = 'Participating Users';
+            $block['content'] = a1_custom_u_av_rat_graph_BLOCK_ABC_CONTENT();
+            break;
+        case 'featured_survey_block':
+            $block['subject'] = 'Featured list ';
+            $block['content'] = a1_custom_feat_survey_BLOCK_ABC_CONTENT();
+            break;
+        case 'active_survey_block':
+            $block['subject'] = 'Active Episode';
+            $block['content'] = a1_custom_active_survey_BLOCK_ABC_CONTENT();
+            break;
+        case 'ended_survey_block':
+            $block['subject'] = 'Closed Episode';
+            $block['content'] = a1_custom_ended_survey_BLOCK_ABC_CONTENT();
+            break;
+        case 'ques_result_block':
+            $block['subject'] = 'Question Results';
+            $block['content'] = a1_ques_result_BLOCK_ABC_CONTENT();
+            break;
+        case 'rec_audio_block':
+            $block['subject'] = 'Recorded Audio';
+            $block['content'] = a1_rec_audio_BLOCK_ABC_CONTENT();
+            break;
+    }
+    return $block;
+}
+
+function a1_ques_result_BLOCK_ABC_CONTENT() {
+    $query = "Select r.quiz_id,r.userid from a1_ques_result r 
+     where r.quiz_id='125' group by userid  ";
+    $result = db_query($query);
+
+    $header = array('Question', 'Users');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+
+            $row = array($row['quiz_id'], $row['userid']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+function a1_rec_audio_BLOCK_ABC_CONTENT() {
+    $query = db_select('a1_audio', 'a');
+    $query->join('users', 'u', 'a.user_id = u.uid');
+    $result1 = $query
+            ->fields('u', array('name'))
+            ->fields('a', array('episode_id', 'filename', 'path', 'timestamps'))
+            ->orderBy('timestamps', 'DESC');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('User', 'Episode Name', 'Filename', 'Recorded Time');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array($row['name'], _get_title($row['episode_id']), l($row['filename'], file_create_url($row['path'])), $row['timestamps']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+function _get_title($nid) {
+    $query = "SELECT n.title
+         from node n 
+where n.nid=$nid
+";
+    $execute = db_query($query);
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar = $row['title'];
+        }
+    }
+    return $ar;
+}
+
+function a1_custom_ended_survey_BLOCK_ABC_CONTENT() {
+    date_default_timezone_set('america/los_angeles');
+    $url1 = arg(1);
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'nid'))
+            ->fields('d', array('field_start_date_value'))
+            ->fields('ed', array('field_end_date_value'))
+            ->fields('sn', array('field_show_name_nid'))
+            ->condition('n.status', 0, '=')
+            ->condition('field_show_name_nid', $url1, '=')
+            ->groupBy('n.title')
+            ->orderBy('n.created', 'DESC');
+    $query->addExpression('COUNT(DISTINCT(a.user_id))', 'no_of_user');
+    $query->JOIN('field_data_field_start_date', 'd', 'n.nid=d.entity_id');
+    $query->JOIN('field_data_field_end_date', 'ed', 'n.nid=ed.entity_id');
+    $query->LEFTJOIN('a1_orientation', 'a', 'd.entity_id=a.episode_id');
+    $query->JOIN(' field_data_field_show_name', 'sn', 'sn.entity_id = n.nid');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('Show Name', 'Episode', 'Start Date', 'End Date', 'Users Participated');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array(_get_title($row['field_show_name_nid']), l($row['title'], 'node/' . $row['nid']), date('Y-m-d h:i:s a ', strtotime($row['field_start_date_value'])), date('Y-m-d h:i:s a ', strtotime($row['field_end_date_value'])), $row['no_of_user']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+function a1_custom_active_survey_BLOCK_ABC_CONTENT() {
+    $url1 = arg(1);
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'nid'))
+            ->fields('d', array('field_start_date_value'))
+            ->fields('ed', array('field_end_date_value'))
+            ->fields('sn', array('field_show_name_nid'))
+            ->condition('n.status', 0, '>')
+            ->condition('field_show_name_nid', $url1, '=')
+            ->groupBy('n.title')
+            ->orderBy('n.created', 'DESC');
+    $query->addExpression('COUNT(DISTINCT(a.user_id))', 'no_of_user');
+    $query->JOIN('field_data_field_start_date', 'd', 'n.nid=d.entity_id');
+    $query->JOIN('field_data_field_end_date', 'ed', 'n.nid=ed.entity_id');
+    $query->LEFTJOIN('a1_orientation', 'a', 'd.entity_id=a.episode_id');
+    $query->JOIN(' field_data_field_show_name', 'sn', 'sn.entity_id = n.nid');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('Show Name', 'Episode', 'Start Date', 'End Date', 'Users Participated');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array(_get_title($row['field_show_name_nid']), l($row['title'], 'node/' . $row['nid']), date('Y-m-d h:i:s a ', strtotime($row['field_start_date_value'])), date('Y-m-d h:i:s a ', strtotime($row['field_end_date_value'])), $row['no_of_user']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+function a1_custom_feat_survey_BLOCK_ABC_CONTENT() {
+    $r = "SELECT fs.shows_id,fs.episode_id,fs.place,fs.display_order from a1_feat_shows fs ";
+    $result = db_query($r);
+    $header = array('Show Name', 'Episode Name','Order', '');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $show = _get_title($row['shows_id']);
+            $episode = _get_title($row['episode_id']);
+	    $display_order = $row['display_order'];
+	    $order='<form method="post"><input type="hidden" name="epid" value="'.$row['episode_id'].'"><input type="text" name="display_order" value="'.$display_order.'" size="4">&nbsp;&nbsp;<input type="submit" name="reorder" value="Reorder"></form>';
+            $row = array($show, $episode,$order , l('Delete', 'deletesurvey/' . $row['episode_id']));
+            $rows[] = $row;
+        }
+    }
+
+    $output1 = theme('table', array('header' => $header, 'rows' => $rows));
+    return $output1;
+}
+
+function delete_confirm() {
+    $url1 = arg(1);
+    $del = "DELETE from a1_feat_shows WHERE episode_id='$url1' ";
+    $result = db_query($del);
+    $count = $result->rowCount();
+    if ($count != '0') {
+        drupal_goto('featured-shows');
+    } else {
+        print "{['message':'Error ']}";
+    }
+}
+
+
+
+
+
+
+function a1_custom_av_rat_graph_BLOCK_ABC_CONTENT() {
+    $url1 = arg(1);
+    $query = "SELECT a1.rate,a1.clock,d.field_episode_duration_value  from a1_orientation a1 
+ JOIN field_data_field_episode_duration d on d.entity_id=a1.episode_id where a1.episode_id='$url1'
+";
+    $execute = db_query($query);
+    $ar = array();
+    $row1 = array();
+    $row2 = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $row1 = _get_title($url1);
+            $row2[] = $row['rate'];
+            $row3 = $row['field_episode_duration_value'];
+        }
+    }
+    $a = $row3 / 5;
+    $b = 5;
+    $t = 0;
+    for ($i = 0; $i < $a; $i++) {
+        $clock[] = $t + 5;
+        $t = $t + 5;
+    }
+    require "./sites/all/libraries/KoolPHPSuite/KoolControls/KoolChart/koolchart.php";
+    $chart = new KoolChart("Rating");
+    $chart->scriptFolder = "./sites/all/libraries/KoolPHPSuite/KoolControls/KoolChart";
+    $chart->PlotArea->XAxis->Title = "clock";
+    //$chart->PlotArea->XAxis->Set(array());
+    $chart->PlotArea->XAxis->Set($clock);
+    $chart->PlotArea->YAxis->Title = "Rate";
+    $chart->PlotArea->YAxis->LabelsAppearance->DataFormatString = " {0}";
+    $series = new LineSeries();
+    $series->TooltipsAppearance->DataFormatString = "{0} {1}";
+    $series->LabelsAppearance->DataFormatString = " ";
+    //$series->ArrayData(array(20,30,40,70,50));
+    $series->ArrayData($row2);
+    $chart->PlotArea->AddSeries($series);
+    return $chart->Render();
+}
+
+function a1_custom_u_av_rat_graph_BLOCK_ABC_CONTENT() {
+    $url1 = arg(1);
+    $r = "SELECT u.name,u.uid,b.field_birthdate_value,a1.timestamps FROM users u 
+      left JOIN  field_data_field_birthdate b ON b.entity_id = u.uid 
+        JOIN  a1_orientation  a1 ON a1.user_id = u.uid 
+WHERE a1.episode_id=$url1 GROUP BY u.uid";
+    $result = db_query($r);
+    $header = array('Name', 'Birthdate', 'Date of survey');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array($row['name'], $row['field_birthdate_value'], date('Y-m-d h:i:s', $row['timestamps']));
+            $rows[] = $row;
+        }
+    }
+
+    $output1 = theme('table', array('header' => $header, 'rows' => $rows));
+    return $output1;
+}
+
+/* function for survey recently added */
+
+function a1_custom_survey_tak_rec_BLOCK_ABC_CONTENT() {
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'nid'))
+            ->fields('a', array('timestamps'))
+            ->orderBy('a.timestamps', desc)
+            ->groupBy('n.title');
+
+    $query->addExpression('COUNT(DISTINCT(a.user_id))', 'no_of_user');
+    $query->JOIN('field_data_field_start_date', 'd', 'n.nid=d.entity_id');
+    $query->JOIN('a1_orientation', 'a', 'd.entity_id=a.episode_id');
+
+    $query = $query->extend('PagerDefault')->limit(5);
+    $result = $query->execute();
+    $header = array('Survey Name (Show)', 'Participants', 'Date');
+    $rows = array();
+    if ($result) {
+    
+        while ($row = $result->fetchAssoc()) {
+//print_r($row);
+$nid=$row['nid'];
+    $q_show="Select n.nid,n.title as showname ,sn.field_show_name_nid from node n 
+     LEFT JOIN field_data_field_show_name sn on sn.entity_id=n.nid where n.nid=$nid";
+     $result1 = db_query($q_show);
+     $row1 = $result1->fetchAssoc();
+
+            $row = array($row['title'].' ('._get_title($row1['field_show_name_nid']).')', $row['no_of_user'], date('Y-m-d h:i:s', $row['timestamps']));
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/* function for user details */
+
+function a1_custom_BLOCK_ABC_CONTENT() {
+    $url1 = arg(1);
+    $r = "SELECT u.name,u.uid,u.created,u.mail,g.field_gender_value,z.field_zip_code_value,b.field_birthdate_value FROM users u 
+       JOIN  field_data_field_gender g ON g.entity_id = u.uid 
+      left JOIN  field_data_field_birthdate b ON b.entity_id = u.uid 
+       LEFT JOIN  field_data_field_zip_code z ON z.entity_id = u.uid 
+WHERE u.uid=$url1";
+    $result = db_query($r);
+    $header = array('User Id', 'Username', 'Email', 'Gender', 'Birthdate', 'Zip Code', 'Created');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array($row['uid'], $row['name'], $row['mail'], $row['field_gender_value'], $row['field_birthdate_value'], $row['field_zip_code_value'], date('Y-m-d', $row['created']));
+            $rows[] = $row;
+        }
+    }
+    $output1 = theme('table', array('header' => $header, 'rows' => $rows));
+    return $output1;
+}
+
+/* function for survey details */
+
+function a1_custom_survey_BLOCK_ABC_CONTENT() {
+    $url2 = arg(2);
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'created', 'nid'))
+            ->fields('d', array('field_start_date_value'))
+            ->fields('e', array('field_end_date_value'))
+            ->condition('n.nid', $url2)
+            ->groupBy('n.nid');
+
+    $query->LEFTJOIN('field_data_field_start_date', 'd', 'd.entity_id=n.nid');
+    $query->LEFTJOIN('field_data_field_end_date', 'e', 'e.entity_id=n.nid');
+    $query->LEFTJOIN('a1_orientation', 'a', 'n.nid=a.episode_id');
+    $result = $query->execute();
+    $header = array('Title', 'Created', 'Start date', 'End date');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array($row['title'], date('M-d-Y', $row['created']), $row['field_start_date_value'], $row['field_end_date_value']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/* function for per survey details */
+
+function mst_par_sur_graph_BLOCK_ABC_CONTENT() {
+    $query = "SELECT n.nid,n.title,count(a1.episode_id) as 'maximum_hit'
+         from node n 
+INNER JOIN a1_orientation a1 on a1.episode_id=n.nid
+where n.type='episodes' group by n.nid order by maximum_hit DESC LIMIT 10
+";
+    $execute = db_query($query);
+    $ar = array();
+    $row1 = array();
+    $row2 = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $row1[] = $row['title'];
+            $row2[] = $row['maximum_hit'];
+        }
+    }
+    $settings['chart']['chartOne'] = array(
+        'header' => $row1,
+        'rows' => array($row2),
+        'columns' => array('Users'),
+        'chartType' => 'BarChart',
+        'containerId' => 'block-system-main',
+        'options' => array(
+            'forceIFrame' => FALSE,
+            'title' => 'Most Popular Surveys',
+            'width' => 800,
+            'height' => 400
+        )
+    );
+//Draw it.
+    $ret = draw_chart($settings);
+}
+
+/* function for creating graph */
+
+function graph_page_form() {
+
+    $eid = arg(2);
+    $query = "SELECT a1.rate,a1.user_id,a1.clock  from a1_orientation a1 
+where a1.episode_id=$eid LIMIT 5
+";
+    $execute = db_query($query);
+    $ar = array();
+    $row1 = array();
+    $row2 = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+
+            $row1 = _get_title($eid);
+            $row2[] = $row['rate'];
+            $row3[] = $row['user_id'];
+            $row4[] = $row['clock'];
+        }
+    }
+    $settings['chart']['chartOne'] = array(
+        'header' => $row4,
+        'rows' => array($row2),
+        'columns' => array($row1),
+        'chartType' => 'LineChart',
+        'containerId' => 'block-block-1',
+        'options' => array(
+            'forceIFrame' => FALSE,
+            'title' => ' User Rating',
+            'width' => 800,
+            'height' => 400
+        )
+    );
+    //$options=_shows();
+    $form['graph']['from'] = array(
+        '#type' => 'select',
+        '#title' => 'From',
+        '#prefix' => '<div id="from">',
+        '#suffix' => '</div>',
+        '#options' => $row4,
+    );
+
+    $form['graph']['to'] = array(
+        '#type' => 'select',
+        '#title' => 'To',
+        '#prefix' => '<div id="to">',
+        '#suffix' => '</div>',
+        '#options' => $row4,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Update'),
+    );
+//Draw it.
+    $ret = draw_chart($settings);
+    //return $ret;
+    return $form;
+}
+
+function graph_page_form_submit($form, &$form_state) {
+    drupal_set_message('click');
+}
+
+/* function for hit of  surveys */
+
+function surveys_page() {
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'nid'))
+            ->fields('d', array('field_start_date_value'))
+            ->fields('ed', array('field_end_date_value'))
+            ->fields('sn', array('field_show_name_nid'))
+            ->groupBy('n.title')
+            ->orderBy('n.created', 'DESC');
+    $query->addExpression('COUNT(DISTINCT(a.user_id))', 'no_of_user');
+    $query->JOIN('field_data_field_start_date', 'd', 'n.nid=d.entity_id');
+    $query->JOIN('field_data_field_end_date', 'ed', 'n.nid=ed.entity_id');
+    $query->JOIN('a1_orientation', 'a', 'd.entity_id=a.episode_id');
+    $query->JOIN(' field_data_field_show_name', 'sn', 'sn.entity_id = n.nid');
+    $query = $query->extend('PagerDefault')->limit(10);
+    $result = $query->execute();
+    $header = array('Show Name', 'Episode', 'Start Date', 'End Date', 'Users Participated');
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $row = array(_get_title($row['field_show_name_nid']), l($row['title'], 'survey-graph/' . $row['nid']), date('Y-m-d h:i:s a ', strtotime($row['field_start_date_value'])), date('Y-m-d h:i:s a ', strtotime($row['field_end_date_value'])), $row['no_of_user']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/* function for all questions */
+
+function questions_page() {
+    $epid = arg(1);
+    $node = node_load($epid); // load the most recent version of node with id 1
+    $most_recent_version_id = $node->vid;
+    $query = "SELECT quiz_node_relationship.child_nid AS question_id,quiz_multichoice_properties.choice_multi AS choice ,node_revision_quiz_node_relationship_1.title AS question_title, quiz_multichoice_answers.answer AS answer_title, quiz_multichoice_answers.id AS answer_id, quiz_node_relationship.parent_nid AS episode_id
+FROM 
+quiz_node_properties quiz_node_properties
+INNER JOIN quiz_node_relationship quiz_node_relationship ON quiz_node_properties.vid = quiz_node_relationship.parent_vid
+INNER JOIN node_revision node_revision_quiz_node_relationship ON quiz_node_relationship.parent_vid = node_revision_quiz_node_relationship.vid
+LEFT JOIN node_revision node_revision_quiz_node_relationship_1 ON quiz_node_relationship.child_vid = node_revision_quiz_node_relationship_1.vid
+LEFT JOIN quiz_multichoice_answers quiz_multichoice_answers ON quiz_node_relationship.child_nid = quiz_multichoice_answers.question_nid
+LEFT JOIN quiz_multichoice_properties quiz_multichoice_properties ON quiz_multichoice_properties.vid=quiz_node_relationship.child_vid
+WHERE (( (quiz_node_properties.vid IN  ($most_recent_version_id)) ))";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar['questions data'][$row[question_id]][] = array("choice" => $row['choice'],
+                "question_id" => $row['question_id'],
+                "question_title" => $row['question_title'],
+                "answer_id" => $row['answer_id'],
+                "answer_title" => $row['answer_title'],
+                "episode_id" => $row['episode_id'],
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+/* function for popular episodes */
+
+function popular_episodes_page() {
+    $uid = arg(1);
+    $query = "SELECT n.nid as Nid,fm.uri ,n.title,count(a1.episode_id) as 'maximum_hit',du.field_episode_duration_value as 'Episode duration',b.body_value as Body,fc.field_credits_value as Credits,
+         sd.field_start_date_value as 'Start Date',ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',
+         sn.field_show_name_nid as 'Show Nid'
+         from node n 
+INNER JOIN a1_orientation a1 on a1.episode_id=n.nid
+LEFT JOIN field_data_body b on b.entity_id=n.nid
+JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+JOIN field_data_field_end_date ed on ed.entity_id= n.nid
+JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+JOIN field_data_field_show_name sn on sn.entity_id=n.nid
+JOIN field_data_field_episode_duration du on du.entity_id=n.nid
+JOIN  field_data_field_credits fc on fc.entity_id=n.nid
+JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+   JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+where n.type='episodes' AND n.status='1' group by n.nid order by at.field_on_air_time_value DESC
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("Nid" => $row['Nid'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['Show Nid']),
+                "title" => $row['title'],
+                "Show Nid" => $row['Show Nid'],
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-h:i a', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-h:i a', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-h:i a', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Auto questionaire" => $row['field_auto_questionaire_value'],
+                "maximum_hit" => $row['maximum_hit'],
+                "status" => _attmpt_survey($uid, $row['Nid'])
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+/* function for active survey */
+
+function tv_shows_page() {
+
+if(isset($_REQUEST['order']) && $_REQUEST['order']=='Show Name' && $_REQUEST['sort']=='asc'){
+$orderby=' order by n.title desc';
+}else{
+$orderby=' order by n.title asc';
+}
+    $query = "Select n.nid,n.title ,count(sn.entity_id) as 'number of episodes' from node n 
+     LEFT JOIN field_data_field_show_name sn on sn.field_show_name_nid=n.nid
+     where n.type='shows'  GROUP BY n.nid $orderby ";
+    $result = db_query($query);
+
+    //$header = array('Show Name', 'Surveys');
+    $header = array(
+    array('data' => 'Show Name',        'field' => 'title',               'sort' => 'DESC'),
+    array('data' => 'Surveys'),
+    
+  );
+
+  
+
+
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+$pretty_path=drupal_get_path_alias('node/' . $row['nid']);
+
+            $row = array(l($row['title'],$pretty_path), $row['number of episodes']);
+            $rows[] = $row;
+        }
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+    $output .= theme('pager', array('tags' => array()));
+    return $output;
+}
+
+/* function for listing of all shows */
+
+function list_of_all_shows() {
+
+    $query = "call allshows()";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("nid" => $row['nid'],
+                "title" => $row['title'],
+                "src" => file_create_url($row['uri']),
+                "body" => $row['body_value'],
+                "number of episodes" => $row['number of episodes']
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function survey_graph_page() {
+    $url2 = arg(1);
+    $query = db_select('node', 'n');
+    $result1 = $query
+            ->fields('n', array('title', 'created', 'nid'))
+            ->fields('d', array('field_start_date_value'))
+            ->fields('e', array('field_end_date_value'))
+            ->fields('sn', array('field_show_name_nid'))
+            ->condition('n.nid', $url2)
+            ->groupBy('n.nid');
+    $query->LEFTJOIN('field_data_field_start_date', 'd', 'd.entity_id=n.nid');
+    $query->LEFTJOIN('field_data_field_end_date', 'e', 'e.entity_id=n.nid');
+    $query->LEFTJOIN('a1_orientation', 'a', 'n.nid=a.episode_id');
+    $query->JOIN('field_data_field_show_name', 'sn', 'sn.entity_id = n.nid');
+    $result = $query->execute();
+    $rows = array();
+    if ($result) {
+        while ($row = $result->fetchAssoc()) {
+            $showname = _get_title($row['field_show_name_nid']);
+            $row = array($showname, $row['title'], $row['field_start_date_value'], $row['field_end_date_value']);
+            $rows[] = $row;
+        }
+    }
+    return theme('survey_template', array('results' => $rows));
+}
+
+function a1_custom_theme() {
+    $themes = array(
+        'survey_template' => array(
+            'template' => 'templates/survey',
+            'arguments' => array('results' => null),
+        ),
+    );
+    return $themes;
+}
+
+function list_of_surveys() {
+    $query = "SELECT n.nid as Nid,n.title,count(a1.episode_id) as 'maximum_hit',b.body_value as Body,
+         sd.field_start_date_value as 'Start Date',ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',
+         sn.field_show_name_nid as 'Show Nid'
+         from node n 
+INNER JOIN a1_orientation a1 on a1.episode_id=n.nid
+LEFT JOIN field_data_body b on b.entity_id=n.nid
+JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+JOIN field_data_field_end_date ed on sd.entity_id= n.nid
+JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+JOIN field_data_field_show_name sn on sn.entity_id=n.nid
+where n.type='episodes' group by n.nid order by maximum_hit DESC LIMIT 6
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            //print_r($row);
+            $ar[] = $row;
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function list_of_fav_shows() {
+    $url1 = arg(1);
+    $url2 = arg(2);
+    $url3 = arg(3);
+    if ($url1 == '1') {
+        $result = "INSERT INTO a1_fav_episodes (nid,uid) VALUES ('$url2','$url3')";
+        db_query($result);
+        print "{['message':'Record Inserted']}";
+    } elseif ($url1 == '0') {
+        $del = "DELETE from a1_fav_episodes WHERE nid='$url2' AND uid='$url3'";
+        $result = db_query($del);
+        $count = $result->rowCount();
+        if ($count != '0') {
+            print "{['message':'Record Deleted']}";
+        } else {
+            print "{['message':'Error ']}";
+        }
+    }
+    return 0;
+}
+
+function ret_fav_shows() {
+    $url1 = arg(1);
+    $query = "SELECT distinct(a1.nid),n.title,b.body_value,fm.uri from a1_fav_episodes a1
+JOIN node n on n.nid=a1.nid  
+ LEFT JOIN field_data_body b on b.entity_id=n.nid
+ JOIN field_data_field_shows_image si on si.entity_id=n.nid
+    JOIN file_managed fm on fm.fid=si.field_shows_image_fid
+where a1.uid=$url1
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("nid" => $row['nid'],
+                "title" => $row['title'],
+                "src" => file_create_url($row['uri']),
+                "body" => $row['body_value'],
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function featured_shows($form, $form_state) {
+    $options = _shows();
+    $form['feature']['shows'] = array(
+        '#type' => 'select',
+        '#title' => 'Shows',
+        '#prefix' => '<div id="Shows">',
+        '#suffix' => '</div>',
+        '#options' => $options,
+    );
+
+    $form['feature']['episodes'] = array(
+        '#type' => 'select',
+        '#title' => 'Episodes',
+        '#prefix' => '<div id="Episodes">',
+        '#suffix' => '</div>',
+        '#options' => _episodes(),
+        '#default_value' => _episodes(),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+    );
+    return $form;
+}
+
+function featured_shows_submit($form, &$form_state) {
+    $show_id = $form_state['values']['shows'];
+    $ep_id = $form_state['values']['episodes'];
+    $query1 = "SELECT count(*)as count from a1_feat_shows";
+    $result = db_query($query1);
+    while ($row = $result->fetchAssoc()) {
+        $ar = $row['count'];
+    }
+    $query = "SELECT episode_id from  a1_feat_shows where episode_id= $ep_id ";
+    $res1 = db_query($query);
+    while ($res = $res1->fetchAssoc()) {
+        $eid = $res['episode_id'];
+    }
+    if ($ar <= '5') {
+        if ($eid) {
+            drupal_set_message('Already Added');
+        } else {
+            $query = "INSERT INTO a1_feat_shows (shows_id,episode_id,place) VALUES ('$show_id','$ep_id','$ar')";
+            $result = db_query($query);
+            drupal_set_message('Record inserted');
+        }
+    } else {
+        drupal_set_message(t('Please delete one record!'), 'error');
+    }
+}
+
+function _shows() {
+    $query = "SELECT n.nid,n.title
+         from node n 
+where n.type='shows'
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[$row['nid']] = $row['title'];
+        }
+    }
+    return $ar;
+}
+
+function _episodes() {
+    $query = "SELECT n.nid,n.title
+         from node n 
+where n.type='episodes'
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[$row['nid']] = $row['title'];
+        }
+    }
+    return $ar;
+}
+
+function featured_shows1($form, $form_state) {
+
+    $url1 = arg(1);
+    $query = "SELECT sn.entity_id,n.title
+         from field_data_field_show_name sn 
+         JOIN node n on n.nid=sn.entity_id
+where sn.field_show_name_nid=$url1
+";
+    $execute = db_query($query);
+    $ar = array();
+    $htm = "";
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $htm.= "<option value=" . $row['entity_id'] . ">" . $row['title'] . " </option>";
+        }
+    }
+    print $htm;
+}
+
+/* provide webservices for user updating */
+
+function user_update() {
+    $uid = arg(1);
+    $account = user_load($uid);
+    $frst_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $birth_date = $_POST["birthdate"];
+    $gender = $_POST["gender"];
+    $zipcode = $_POST["zipcode"];
+    $name = $_POST["name"];
+    $str = $_POST["ethinicity"];
+    $enthicity = explode(",", $str);
+    $str2 = $_POST["tvshows"];
+    $tvshows = explode(",", $str2);
+
+    $edit = array(
+        'name' => $name,
+        'field_first_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $frst_name,
+                ),
+            ),
+        ),
+        'field_last_name' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $last_name,
+                ),
+            ),
+        ),
+        'field_birthdate' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $birth_date,
+                ),
+            ),
+        ),
+        'field_gender' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $gender,
+                ),
+            ),
+        ),
+        'field_zip_code' => array(
+            'und' => array(
+                0 => array(
+                    'value' => $zipcode,
+                ),
+            ),
+        ),
+        'field_user_updated_date' => array(
+            'und' => array(
+                0 => array(
+                    'value' => date('M-d-Y', time()),
+                ),
+            ),
+        ),
+    );
+
+    foreach (array_keys($enthicity) as $key => $val) {
+        $edit['field_race_ethnicity']['und'][$key]['value'] = array('tid' => $enthicity[$val]);
+    }
+    foreach (array_keys($tvshows) as $key => $val) {
+        $edit['field_tv_shows_you_watch_at_leas']['und'][$key]['value'] = $tvshows[$val];
+    }
+    if (!empty($edit)) {
+        user_save($account, $edit);
+        print "{['message':'Updated Sucessfully']}";
+    } else {
+        print "{['message':'Error ']}";
+    }
+}
+
+function quiz_answers() {
+    $jsondata = $_POST['jsondata'];
+    $data = json_decode($jsondata, true);
+    $tot = $data['noOfQuestions'];
+    $id = $data['userid'];
+    $eid = $data['episodeId'];
+    $quizid = $data['quizId'];
+    for ($i = 0; $i < $tot; $i++) {
+        $qid = $data['question_arr'][$i]['questionId'];
+        $aid1 = count($data['question_arr'][$i]['answerId']);
+        for ($j = 0; $j < $aid1; $j++) {
+            $aid = $data['question_arr'][$i]['answerId'][$j]['ans'];
+            $status = $data['question_arr'][$i]['answerId'][$j]['status'];
+            $result = "INSERT INTO a1_ques_result (userid,episodeId,questionId,answerId,quiz_id,status) 
+    VALUES ('$id','$eid','$qid','$aid','$quizid','$status')";
+            $result1 = db_query($result);
+        }
+    }
+    if ($result1) {
+        print "{['message':'success']}";
+    } else {
+        print "{['message':'data not found']}";
+    }
+}
+
+function a1_custom_form_alter(&$form, $form_state, $form_id) {
+    $form['field_user_credit']['#disabled'] = TRUE;
+    $form['field_type']['#disabled'] = TRUE;
+
+    if ($form_id == 'episodes_node_form') {
+        $url3 = arg(3);
+        if ($url3 != 0) {
+            $query = "SELECT nid,title from node WHERE nid=$url3";
+            $execute = db_query($query);
+            $ar = array();
+            if ($execute) {
+                while ($row = $execute->fetchAssoc()) {
+                    $ar[$row['nid']] = $row['title'];
+                }
+            }
+            $form['field_show_name']['und']['#options'] = $ar;
+        }
+    } else if ($form_id == 'quiz_node_form') {
+        if (arg(2) == 'edit') {
+          $episodeid = node_load($form['field_episodes_name']['und']['#default_value'][0]);
+
+          $checkdailer = $episodeid->field_dialer['und'][0]['value'];
+       //   drupal_set_message($checkdailer);
+          if(!$checkdailer)
+          {
+          $form['field_auto_popup']['#access'] = 0;
+          }
+          $form['field_episodes_name']['#disabled'] = TRUE;
+        }
+        $url3 = arg(3);
+        if ($url3 != 0) {
+            $query = "SELECT nid,title from node WHERE nid=$url3";
+            $execute = db_query($query);
+            $ar = array();
+            if ($execute) {
+                while ($row = $execute->fetchAssoc()) {
+                    $ar[$row['nid']] = $row['title'];
+                }
+            }
+            $form['field_episodes_name']['und']['#options'] = $ar;
+        }
+    } else if ($form_id == 'user_login' || $form_id == 'user_login_block') {
+        $markup = l(t('Forgot Password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+        $markup = '<div class="clearfix">' . $markup . '</div>';
+        $form['links']['#markup'] = $markup;
+    } else if ($form_id == 'user_profile_form') {
+        $form['field_user_updated_date']['#disabled'] = TRUE;
+    }
+}
+
+function audio() {
+    $uid = arg(1);
+    $eid = arg(2);
+    $file_path = "public://";
+    $filename = $_FILES['uploaded_file']['name'];
+    $file_path = $file_path . basename($_FILES['uploaded_file']['name']);
+    if ($file = move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $file_path)) {
+        $time = date("Y-m-d h:i:s", time());
+        $result = "INSERT INTO a1_audio (user_id, episode_id,filename,path,timestamps) VALUES ('$uid','$eid','$filename','$file_path','$time')";
+        db_query($result);
+        print "{['message':'success']}";
+    } else {
+        echo "fail";
+    }
+}
+
+function _feature_shows() {
+    $query = "SELECT n.nid,n.title
+         from node n 
+where n.type='shows' and n.nid NOT IN (SELECT shows_id FROM a1_feat_shows)
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[$row['nid']] = $row['title'];
+        }
+    }
+    return $ar;
+}
+
+function _feature_episodes() {
+    $query = "SELECT n.nid,n.title
+         from node n 
+where n.type='episodes' and n.nid NOT IN (SELECT episode_id FROM a1_feat_shows)
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[$row['nid']] = $row['title'];
+        }
+    }
+    return $ar;
+}
+
+function _episodes_replace() {
+    $query = "SELECT episode_id FROM a1_feat_shows";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[$row['episode_id']] = _get_title($row['episode_id']);
+        }
+    }
+    return $ar;
+}
+
+function a1_custom_sche_featureform($form, &$form_state) {
+
+    $form['sche_date'] = array(
+        '#type' => 'date_popup',
+        '#title' => "Schedule Date"
+    );
+    $options = _feature_shows();
+
+    $form['feature']['shows'] = array(
+        '#type' => 'select',
+        '#title' => 'Shows',
+        '#prefix' => '<div id="Shows">',
+        '#suffix' => '</div>',
+        '#options' => $options,
+    );
+
+    $form['feature']['episodes'] = array(
+        '#type' => 'select',
+        '#title' => 'Episodes',
+        '#prefix' => '<div id="Episodes">',
+        '#suffix' => '</div>',
+        '#options' => _feature_episodes(),
+    );
+    $options = _episodes_replace();
+    $form['place'] = array(
+        '#type' => 'select',
+        '#title' => t('Episode Replace'),
+        '#options' => $options,
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+    );
+    return $form;
+}
+
+function a1_custom_sche_featureform_submit($form, &$form_state) {
+    $date = strtotime($form_state['values']['sche_date']);
+    $show_id = $form_state['values']['shows'];
+    $ep_id = $form_state['values']['episodes'];
+    $place = $form_state['values']['place'];
+    $query = "INSERT INTO a1_sche_episode (show_id,episode_id,place,schedule_date) VALUES ('$show_id','$ep_id','$place','$date')";
+    $result = db_query($query);
+    drupal_set_message('Record inserted');
+}
+
+function single_attmpt_questions() {
+    $user_id = $_POST['uid'];
+    $ques_id = $_POST['quid'];
+    $query = "SELECT userid from a1_ques_result where userid=$user_id AND quiz_id=$ques_id";
+    $result = db_query($query);
+    while ($row = $result->fetchAssoc()) {
+        $uid = $row['userid'];
+    }
+    if ($uid) {
+        echo 'attempted';
+    } else {
+        echo 'not attempted';
+    }
+}
+
+function user_image() {
+    $uid = arg(1);
+    $account = user_load($uid);
+    $file_path = "public://";
+    $filename = $_FILES['user_picture']['name'];
+
+    $file_path = $file_path . basename($_FILES['user_picture']['name']);
+    $file = move_uploaded_file($_FILES['user_picture']['tmp_name'], $file_path);
+
+    $file = new stdClass;
+    $file->uid = $uid;
+    $file->filename = $filename;
+    $file->uri = $file_path;
+    $file->filemime = file_get_mimetype($file_path);
+    $file->filesize = filesize($uri);
+    file_save($file);
+    $edit['picture'] = $file;
+
+    if (!empty($edit['picture'])) {
+        user_save($account, $edit);
+        print "{['message':'Uploaded Sucessfully']}";
+    } else {
+        print "{['message':'Error in uploading']}";
+    }
+}
+
+function single_attmpt_survey() {
+    $user_id = $_POST['uid'];
+    $e_id = $_POST['eid'];
+    $query = "SELECT user_id from a1_orientation  
+            where user_id=$user_id AND episode_id=$e_id";
+    $result = db_query($query);
+    while ($row = $result->fetchAssoc()) {
+        $uid = $row['user_id'];
+    }
+    if ($uid) {
+        echo 'attempted';
+    } else {
+        echo 'not attempted';
+    }
+}
+
+function get_user_id() {
+    $email = $_GET['email'];
+    $mail = "$email";
+    $query = "SELECT uid from users  
+            where mail='$mail'";
+    $result = db_query($query);
+    while ($row = $result->fetchAssoc()) {
+        $uid = $row['uid'];
+    }
+    if ($result) {
+        print $uid;
+    } else {
+        print "{['message':'uid not found']}";
+    }
+}
+
+function _attmpt_survey($uid, $eid) {
+    $query = "SELECT distinct(status) from a1_orientation  
+            where user_id=$uid AND episode_id=$eid";
+    $result = db_query($query);
+    while ($row = $result->fetchAssoc()) {
+        $uid = $row['status'];
+    }
+    if ($uid == 1) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+function list_of_fetaured() {
+    $uid = arg(1);
+    $query = "SELECT fs.episode_id as 'Nid',fm.uri,sn.field_show_name_nid,fc.field_credits_value AS Credits,n.title,b.body_value as Body,sd.field_start_date_value as 'Start Date',
+         ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',du.field_episode_duration_value as 'Episode duration'
+         FROM a1_feat_shows fs
+JOIN node n on n.nid=fs.episode_id
+LEFT JOIN field_data_body b on b.entity_id=fs.episode_id
+JOIN field_data_field_start_date sd on sd.entity_id= fs.episode_id
+JOIN field_data_field_end_date ed on ed.entity_id= fs.episode_id
+JOIN  field_data_field_on_air_time at on at.entity_id=fs.episode_id
+JOIN field_data_field_episode_duration du on du.entity_id=fs.episode_id
+JOIN field_data_field_show_name sn on sn.entity_id=fs.episode_id
+left JOIN  field_data_field_credits fc on fc.entity_id=fs.episode_id
+JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+   JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+     where n.status=1 order by fs.display_order asc 
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("Nid" => $row['Nid'],
+                "title" => $row['title'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['field_show_name_nid']),
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-H:i', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-H:i', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-H:i', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Auto questionaire" => $row['field_auto_questionaire_value'],
+                "status" => _attmpt_surveys($uid, $row['Nid'])
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function newepisodes() {
+    $uid = arg(1);
+    $query = "SELECT n.nid as 'Nid',n.title,b.body_value as Body,sd.field_start_date_value as 'Start Date',
+         ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',du.field_episode_duration_value as 'Episode duration'
+,fc.field_credits_value AS Credits,sn.field_show_name_nid,fm.uri       
+from node n
+         LEFT JOIN field_data_body b on b.entity_id=n.nid
+         JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+         JOIN field_data_field_end_date ed on ed.entity_id= n.nid
+         JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+         JOIN field_data_field_episode_duration du on du.entity_id=n.nid
+         left JOIN  field_data_field_credits fc on fc.entity_id=n.nid
+         JOIN field_data_field_show_name sn on sn.entity_id=n.nid
+         JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+         JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+         where n.status=1 and n.type='episodes' order by at.field_on_air_time_value desc
+";
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("Nid" => $row['Nid'],
+                "title" => $row['title'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['field_show_name_nid']),
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-h:i a', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-h:i a', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-h:i a', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Auto questionaire" => $row['field_auto_questionaire_value'],
+                "status" => _attmpt_survey($uid, $row['Nid'])
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function allepisodes() {
+    $uid = arg(1);
+    $query = "SELECT n.nid as 'Nid',n.title,b.body_value as Body,sd.field_start_date_value as 'Start Date',
+         ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',du.field_episode_duration_value as 'Episode duration'
+,fc.field_credits_value AS Credits,sn.field_show_name_nid,fm.uri       
+from node n
+         LEFT JOIN field_data_body b on b.entity_id=n.nid
+         JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+         JOIN field_data_field_end_date ed on ed.entity_id= n.nid
+         JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+         JOIN field_data_field_episode_duration du on du.entity_id=n.nid
+         left JOIN  field_data_field_credits fc on fc.entity_id=n.nid
+         JOIN field_data_field_show_name sn on sn.entity_id=n.nid
+         JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+         JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+         where n.status=1 and n.type='episodes' order by at.field_on_air_time_value DESC 
+    
+";
+
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $ar[] = array("Nid" => $row['Nid'],
+                "title" => $row['title'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['field_show_name_nid']),
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-h:i a', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-h:i a', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-h:i a', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Auto questionaire" => $row['field_auto_questionaire_value'],
+                "status" => _attmpt_survey($uid, $row['Nid'])
+            );
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+function epi_acc_to_show() {
+    $uid = arg(2);
+    $show_id = arg(1);
+    $currentdate=date('Y-m-d h:i:s');
+
+    $query = "SELECT sn.entity_id as 'Nid',n.title,b.body_value as Body,sd.field_start_date_value as 'Start Date'
+     ,ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',du.field_episode_duration_value as 'Episode duration'  
+,fc.field_credits_value AS Credits,sn.field_show_name_nid,fm.uri,fd.field_dialer_value  
+from field_data_field_show_name sn
+JOIN node n on n.nid=sn.entity_id
+LEFT JOIN field_data_body b on b.entity_id=n.nid
+JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+JOIN field_data_field_end_date ed on ed.entity_id= n.nid
+ JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+  JOIN field_data_field_episode_duration du on du.entity_id=n.nid
+   left JOIN  field_data_field_credits fc on fc.entity_id=n.nid
+   JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+   JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+   JOIN field_data_field_dialer fd on fd.entity_id= n.nid    
+
+where field_show_name_nid=$show_id and n.status=1  
+
+";
+    $execute = db_query($query);
+    $ar = array();
+    
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+	$attempt='';
+	 $query_check_question = "SELECT  entity_id from field_data_field_episodes_name where field_episodes_name_nid=$row[Nid]";
+         $result_check_question = db_query($query_check_question);
+	 $row_check =$result_check_question->fetchAssoc();
+
+
+	 if( $row['field_dialer_value']==0 && $row_check['entity_id'] ==''){
+		}else{
+
+		$query_check_question1 = "SELECT  count(field_episodes_name_nid) as survey from field_data_field_episodes_name where field_episodes_name_nid=$row[Nid]";
+         $result_check_question1 = db_query($query_check_question1);
+	 $row_check1 =$result_check_question1->fetchAssoc();
+	if($row_check1['survey'] == 0){
+		}else{			
+		$total_attmpt=_total_attmpt_surveys($uid, $row['Nid']);
+		$left_survey=$row_check1['survey']-$total_attmpt;
+
+		if($left_survey<0)
+		$left_survey=0;
+
+              $ar[] = array("Nid" => $row['Nid'],
+                "title" => $row['title'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['field_show_name_nid']),
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-h:i a', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-h:i a', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-h:i a', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Auto questionaire" => $row['field_auto_questionaire_value'],
+		"Dialer" => $row['field_dialer_value'],
+                "attempted" => _attmpt_surveys($uid, $row['Nid']), 
+		"total_attempted" => _total_attmpt_surveys($uid, $row['Nid']),
+                "status" => _attmpt_survey($uid, $row['Nid']),
+		"No_of_survey" => $row_check1['survey'],
+		"left_survey" => $left_survey
+            );
+	    }
+	    }
+        }
+
+	function sortByOrder($a, $b) {
+    return $a['attempted'] - $b['attempted'];
+}
+
+usort($ar, 'sortByOrder');
+
+        print drupal_json_encode($ar);
+    }
+}
+
+function userprofile() {
+    $uid = arg(1);
+    $account = user_load($uid);
+
+    $ar[] = array("name" => $account->name,
+        "Birthdate" => $account->field_birthdate[und][0][value],
+        "Created date" => $account->created,
+        "E-mail" => $account->mail,
+        "Uid" => $account->uid,
+        "First Name" => $account->field_first_name[und][0][value],
+        "Last Name" => $account->field_last_name[und][0][value],
+        "Zip Code" => $account->field_zip_code[und][0][value],
+        "User Updated Date" => $account->field_user_updated_date[und][0][value],
+        "type" => $account->field_type[und][0][value],
+        "user credit" => $account->field_user_credit[und][0][value],
+        "User Image Path" => file_create_url($account->picture->uri),
+        "Gender" => $account->field_gender[und][0][value],
+        "Race/Ethnicity" => array($account->field_race_ethnicity[und][0][value], $account->field_race_ethnicity[und][1][value]),
+        "TV shows you watch at least once a week?" => array($account->field_tv_shows_you_watch_at_leas[und][0][value], $account->field_tv_shows_you_watch_at_leas[und][1][value])
+    );
+
+    print drupal_json_encode($ar);
+}
+
+function forgotpassword() {
+    $username = $_POST['username'];
+    $mail = $_POST['mail'];
+
+    $query = "SELECT uid from users where name='$username' or mail='$mail'
+";
+    $execute = db_query($query);
+
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+            $uid = $row['uid'];
+        }
+    }
+    if ($uid == 0) {
+        print drupal_json_encode('user not exist');
+    } else {
+        $account = user_load($uid);
+        if ($account->field_type['und'][0]['safe_value'] == 'facebook') {
+            print drupal_json_encode('facebook user');
+        } else {
+            _user_mail_notify('password_reset', $account, $language);
+            print drupal_json_encode('mail sent');
+        }
+    }
+}
+
+
+
+function nodialerepisode(){
+
+ $uid = arg(1);
+    $query = "SELECT distinct(n.nid) as 'Nid',n.title,b.body_value as Body,sd.field_start_date_value as 'Start Date',
+         ed.field_end_date_value as 'End Date',at.field_on_air_time_value as 'On Air Time',du.field_episode_duration_value as 'Episode duration'
+,fc.field_credits_value AS Credits,sn.field_show_name_nid,fm.uri,fd.field_dialer_value      
+from node n
+
+         LEFT JOIN field_data_body b on b.entity_id=n.nid
+         JOIN field_data_field_start_date sd on sd.entity_id= n.nid
+         JOIN field_data_field_end_date ed on ed.entity_id= n.nid
+         JOIN  field_data_field_on_air_time at on at.entity_id=n.nid
+         JOIN field_data_field_episode_duration du on du.entity_id=n.nid
+         left JOIN  field_data_field_credits fc on fc.entity_id=n.nid
+         JOIN field_data_field_show_name sn on sn.entity_id=n.nid
+         JOIN field_data_field_episode_picture ep on ep.entity_id=n.nid
+         JOIN file_managed fm on fm.fid=ep.field_episode_picture_fid
+         JOIN field_data_field_dialer fd on fd.entity_id= n.nid
+         JOIN field_data_field_episodes_name fe on fe.field_episodes_name_nid= n.nid
+       
+
+         where n.status=1 and n.type='episodes' and fd.field_dialer_value=0  order by at.field_on_air_time_value DESC 
+    
+";
+
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) {
+
+	$query_check_question = "SELECT  entity_id from field_data_field_episodes_name where field_episodes_name_nid=$row[Nid]";
+         $result_check_question = db_query($query_check_question);
+	 $row_check =$result_check_question->fetchAssoc();
+
+
+	 if( $row['field_dialer_value']==0 && $row_check['entity_id'] ==''){
+		}else{
+
+		$query_check_question1 = "SELECT  child_nid from quiz_node_relationship where parent_nid=$row_check[entity_id]";
+         $result_check_question1 = db_query($query_check_question1);
+	 $row_check1 =$result_check_question1->fetchAssoc();
+	if($row['field_dialer_value']==0 && $row_check1['child_nid'] ==''){
+		}else{	
+
+            $ar[] = array("Nid" => $row['Nid'],
+                "title" => $row['title'],
+                "Episode Picture" => array('src' => file_create_url($row['uri'])),
+                "field_show_name" => _get_title($row['field_show_name_nid']),
+                "Credits" => $row['Credits'],
+                "Body" => $row['Body'],
+                "Start Date" => date('M d Y-h:i a', strtotime($row['Start Date'])),
+                "End Date" => date('M d Y-h:i a', strtotime($row['End Date'])),
+                "On Air Time" => date('M d Y-h:i a', strtotime($row['On Air Time'])),
+                "Episode duration" => $row['Episode duration'],
+                "Dialer" => $row['field_dialer_value'],
+                "status" => _attmpt_survey($uid, $row['Nid']),
+               "attempted" => _attmpt_surveys($uid, $row['Nid'])
+            );
+	    }
+	    }
+        }
+        print drupal_json_encode($ar);
+    }
+
+}
+
+
+function _attmpt_surveys($user_id, $e_id ) {
+    $query = "SELECT distinct(quiz_id) as quiz from a1_ques_result where userid=$user_id AND episodeId=$e_id";
+    $result = db_query($query);
+    while ($row = $result->fetchAssoc()) {
+        $uid = $row['quiz'];
+
+    }
+    if ($uid) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+function _total_attmpt_surveys($user_id, $e_id ) {
+    $query = "SELECT count(DISTINCT quiz_id) as quiz_count from a1_ques_result where userid=$user_id AND episodeId=$e_id";
+    $result = db_query($query);
+    $row = $result->fetchAssoc();
+        $total_attmpt = $row['quiz_count'];
+
+        return $total_attmpt;
+    
+}
+
+
+function questionaire_acc_episode(){
+ $eid=arg(1);
+ $uid=arg(2);
+ $greyout='';
+
+ $query = "SELECT n.title,n.nid,fen.field_episodes_name_nid,ap.field_auto_popup_value, pt.field_popup_time_value  FROM node n  JOIN field_data_field_episodes_name
+ fen on fen.entity_id= n.nid
+JOIN field_data_field_auto_popup ap on ap.entity_id= n.nid
+LEFT JOIN field_data_field_popup_time pt on pt.entity_id= n.nid
+
+ where n.type='quiz' AND fen.field_episodes_name_nid =$eid
+    
+";
+
+    $execute = db_query($query);
+    $ar = array();
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) { //print_r($row); 
+$count_questions=_get_question_count($row['nid']);
+$count_answer=_get_answer_count($row['nid'],$row['field_episodes_name_nid'],$uid);
+if($row['field_popup_time_value']==null){
+$row['field_popup_time_value']='';
+}
+
+if($count_questions != 0){
+
+if($count_answer ==1)
+$greyout=1;
+else
+$greyout=0;
+ $ar[] = array("Questionaire Node NID" => $row['nid'],
+                "title" => $row['title'],
+               "Episodes Name" => _get_title($row['field_episodes_name_nid']),
+                "Auto popup" => $row['field_auto_popup_value'],
+                "Popup Time" => $row['field_popup_time_value'],
+               "No of questions" => $count_questions,
+	       "No of answer" => $count_answer,
+	       "Episode Id" => $row['field_episodes_name_nid'],
+	       "Userid" => $uid,
+	       "Greyout" => $greyout
+
+);
+     }        
+        }
+        print drupal_json_encode($ar);
+    }
+}
+
+
+/*function for counting answer questions */
+function _get_answer_count($nid,$eid,$uid) {
+    $query = "SELECT count(DISTINCT quiz_id) as answer
+         from a1_ques_result  
+where quiz_id=$nid and episodeId=$eid and userid=$uid 
+";
+
+    $execute = db_query($query);
+    if ($execute) {
+        $row = $execute->fetchAssoc(); //print_r($row);
+            
+    }
+    return $row['answer'];
+}
+
+
+
+
+/*function for counting questions */
+function _get_question_count($nid) {
+    $query = "SELECT count(child_nid) as questions
+         from quiz_node_relationship qnr 
+where qnr.parent_nid=$nid
+";
+    $execute = db_query($query);
+    if ($execute) {
+        while ($row = $execute->fetchAssoc()) { //print_r($row);
+            $ar = $row['questions'];
+        }
+    }
+    return $ar;
+}
+
+
+
+
